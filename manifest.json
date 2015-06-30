@@ -1,0 +1,20 @@
+{
+  "manifest_version" : 2,
+
+  "name" : "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "0.1",
+  "default_locale": "en",
+
+  "icons": {
+
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "contribute.html"
+  },
+
+  "permissions": [
+    "https://github.com/"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "Desire to Commit",
+    "description": "The title of the application."
+  },
+  "appDesc": {
+    "message": "Replaces the new tab page with the current contribution streak from github",
+    "description": "The description of the application."
+  },
+
+  "streakText": {
+    "message": "Day Streak!",
+    "description": ""
+  }
+}
