@@ -4,29 +4,38 @@ var LOCAL_USERNAME_KEY = "githubUsername";
 window.onload = function() {
   // localStorage.removeItem(LOCAL_STREAK_KEY);
   // localStorage.removeItem(LOCAL_USERNAME_KEY);
-  renderView();
-  setupText();
 
-  addSubmitEventListener();
-};
-
-var renderView = function() {
   if (loadUsername() === null) {
-    var source   = document.getElementById("ask-form").innerHTML;
-    addSubmitEventListener();
+    renderForm();
   } else {
-    var source   = document.getElementById("streak").innerHTML;
-    getContributionData();
+    renderStreak();
   }
 
-  var template = Handlebars.compile(source);
+  setLocalizedText();
+};
+
+var renderForm = function() {
+  var source = document.getElementById("ask-form").innerHTML;
+  render(source);
+
+  addSubmitEventListener();
+}
+
+var renderStreak = function() {
+  var source = document.getElementById("streak").innerHTML;
+  render(source);
+
+  document.getElementById("days").innerHTML = loadStreak();
+  getContributionData();
+}
+
+var render = function(sourceView) {
+  var template = Handlebars.compile(sourceView);
   var html = template();
   document.getElementById("display").innerHTML = html;
 }
 
-var setupText = function() {
-  document.getElementById("days").innerHTML = loadStreak();
-
+var setLocalizedText = function() {
   // Loops through the page and replace all text with locale compatible fields
   var dataLocale = document.querySelectorAll('[data-locale]');
   for (var i = 0; i < dataLocale.length; i++) {
@@ -112,7 +121,8 @@ var saveUsername = function(username) {
 }
 
 var loadStreak = function() {
-  return localStorage.getItem(LOCAL_STREAK_KEY);
+  var streak = localStorage.getItem(LOCAL_STREAK_KEY);
+  return (streak === null) ? '0' : streak;
 }
 
 var saveStreak = function(count) {
