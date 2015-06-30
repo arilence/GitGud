@@ -1,67 +1,96 @@
 var LOCAL_STREAK_KEY = "contributionStreak";
 var LOCAL_USERNAME_KEY = "githubUsername";
 
-$(document).ready(function() {
+window.onload = function() {
   // localStorage.removeItem(LOCAL_STREAK_KEY);
   // localStorage.removeItem(LOCAL_USERNAME_KEY);
   renderView();
   setupText();
 
-  $("#ask-form").submit(function( event ) {
-    var inputUsername = $("#ask-form-username").val();
+  addSubmitEventListener();
+};
+
+var renderView = function() {
+  if (loadUsername() === null) {
+    var source   = document.getElementById("ask-form").innerHTML;
+    addSubmitEventListener();
+  } else {
+    var source   = document.getElementById("streak").innerHTML;
+    getContributionData();
+  }
+
+  var template = Handlebars.compile(source);
+  var html = template();
+  document.getElementById("display").innerHTML = html;
+}
+
+var setupText = function() {
+  document.getElementById("days").innerHTML = loadStreak();
+
+  // Loops through the page and replace all text with locale compatible fields
+  var dataLocale = document.querySelectorAll('[data-locale]');
+  for (var i = 0; i < dataLocale.length; i++) {
+    var resourceName = dataLocale[i].dataset.locale;
+    dataLocale[i].innerHTML = chrome.i18n.getMessage(resourceName);
+  }
+}
+
+var addSubmitEventListener = function() {
+  var askForm = document.getElementById("ask-form");
+  askForm.addEventListener("submit", function(event) {
+    var inputUsername = document.getElementById("ask-form-username").value;
     if (inputUsername.length != 0) {
       saveUsername(inputUsername);
       renderView();
     }
     event.preventDefault();
   });
-});
-
-var renderView = function() {
-  if (loadUsername() === null) {
-    var source   = $("script#ask-form").html();
-  } else {
-    var source   = $("script#streak").html();
-    getContributionData();
-  }
-
-  var template = Handlebars.compile(source);
-  var html = template();
-  $("#display").html(html);
-}
-
-var setupText = function() {
-  $("#days").html(loadStreak());
-
-  // Loops through the page and replace all text with locale compatible fields
-  $('[data-locale]').each(function() {
-    var el = $(this);
-    var resourceName = el.data('locale');
-    var resourceText = chrome.i18n.getMessage(resourceName);
-    el.text(resourceText);
-  });
 }
 
 var getContributionData = function() {
-  $.get('https://github.com/users/' + loadUsername() + '/contributions')
-    .done(function(data) {
-      calculateStreak(data);
-    })
-    .fail(function() {
-      showError();
-    });
+  var xmlhttp;
+
+  if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+         if(xmlhttp.status == 200){
+             calculateStreak(xmlhttp.responseText);
+         }
+         else if(xmlhttp.status == 400) {
+            alert('There was an error 400');
+         }
+         else {
+             alert('something else other than 200 was returned');
+         }
+      }
+  }
+
+  xmlhttp.open("GET", 'https://github.com/users/' + loadUsername() + '/contributions', true);
+  xmlhttp.send();
 }
 
-var calculateStreak = function(contribution) {
+var calculateStreak = function(svgGraph) {
   var a = [[]];
-  $(contribution).find('rect').each(function(){
-    a.push([$(this).data('date'), $(this).attr('fill')]);
-  });
 
-  var previousColor = a[a.length-2][1];
+  var svgElement = document.createElement('svg');
+  svgElement.innerHTML = svgGraph;
+  var rectangles = svgElement.getElementsByTagName('rect');
+
+  for (var i = rectangles.length-1; i >= 0; i--) {
+    a[i] = ([rectangles[i].dataset.date, rectangles[i].getAttribute('fill')]);
+  }
+
+  var previousColor = a[a.length-1][1];
   var count = 0;
 
-  for (var i = a.length-2; i >= 0; i--) {
+  for (var i = a.length-1; i >= 0; i--) {
     if (previousColor != "#eeeeee") {
       if (a[i][1] != "#eeeeee") {
         count++;
@@ -91,7 +120,7 @@ var saveStreak = function(count) {
 }
 
 var showStreak = function(count) {
-  $("#days").html(count);
+  document.getElementById("days").innerHTML = count;
 }
 
 var showError = function() {
