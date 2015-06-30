@@ -5,8 +5,7 @@
   <title>New Tab</title>
 
   <style>
-    #streak {
-      font-size: 100px;
+    #streak, #ask-form {
       text-align: center;
       margin: 0;
       padding: 0;
@@ -16,22 +15,37 @@
       transform: translate(-50%, -50%);
     }
     h1 {
+      font-size: 10em;
       margin: 0;
       padding: 0;
     }
     h4 {
+      font-size: 2em;
       margin: 0;
       padding: 0;
     }
   </style>
 </head>
 <body>
-  <div id="streak">
-    <h1 id="days">#</h1>
-    <h4 id="text">Day Streak!</h4>
-  </div>
+  <div id="display"></div>
+
+  <script id="ask-form" type="text/x-handlebars-template">
+    <form id="ask-form">
+      <h4 data-locale="askFormQuestion">What is your github username?</h4>
+      <input type="text" name="username" id="ask-form-username" />
+      <button type="submit" id="ask-form-submit" data-locale="askFormSubmit">Submit</button>
+    </form>
+  </script>
+
+  <script id="streak" type="text/x-handlebars-template">
+    <div id="streak">
+      <h1 id="days">0</h1>
+      <h4 id="text" data-locale="streakText">Day Streak!</h4>
+    </div>
+  </script>
 
   <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="handlebars-v3.0.3.js"></script>
   <script type="text/javascript" src="contribute.js"></script>
 </body>
 </html>

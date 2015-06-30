@@ -11,5 +11,14 @@
   "streakText": {
     "message": "Day Streak!",
     "description": ""
+  },
+
+  "askFormQuestion": {
+    "message": "What is your github username?",
+    "description": ""
+  },
+  "askFormSubmit": {
+    "message": "Submit",
+    "description": ""
   }
 }
