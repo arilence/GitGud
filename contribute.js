@@ -97,9 +97,18 @@ var calculateStreak = function(svgGraph) {
   }
 
   var previousColor = a[a.length-1][1];
+  var startColor = a[a.length-1][1];
   var count = 0;
 
-  for (var i = a.length-1; i >= 0; i--) {
+  // Fixes the problem where a new day has started and the counter incorrectly reset to zero
+  if (startColor == "#eeeeee" && a[a.length-2][1] != "#eeeeee") {
+    previousColor = null;
+  }
+  else if (startColor != "#eeeeee") {
+    count++;
+  }
+
+  for (var i = a.length-2; i >= 0; i--) {
     if (previousColor != "#eeeeee") {
       if (a[i][1] != "#eeeeee") {
         count++;
