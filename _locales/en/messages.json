@@ -20,5 +20,14 @@
   "askFormSubmit": {
     "message": "Submit",
     "description": ""
+  },
+
+  "error404": {
+    "message": "Cannot find the username specified",
+    "description": ""
+  },
+  "errorOther": {
+    "message": "Uh oh, something went wrong",
+    "description": ""
   }
 }

@@ -31,16 +31,16 @@
 
   <script id="ask-form" type="text/x-handlebars-template">
     <form id="ask-form">
-      <h4 data-locale="askFormQuestion">What is your github username?</h4>
+      <h4>{{ askFormQuestion }}</h4>
       <input type="text" name="username" id="ask-form-username" />
-      <button type="submit" id="ask-form-submit" data-locale="askFormSubmit">Submit</button>
+      <button type="submit" id="ask-form-submit">{{ askFormSubmit }}</button>
     </form>
   </script>
 
   <script id="streak" type="text/x-handlebars-template">
     <div id="streak">
       <h1 id="days">0</h1>
-      <h4 id="text" data-locale="streakText">Day Streak!</h4>
+      <h4 id="text">{{ streakText }}</h4>
     </div>
   </script>
 
