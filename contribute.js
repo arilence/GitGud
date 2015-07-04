@@ -89,7 +89,7 @@ var getContributionData = function() {
         calculateStreak(xmlhttp.responseText);
       }
       else {
-        alert(getLocalizedText('errorOther'));
+        // An error occurred
       }
     }
   }
@@ -166,7 +166,13 @@ var setStreak = function(count) {
 }
 
 var showStreak = function(count) {
-  document.getElementById("large").innerHTML = count;
+  if (count > 0) {
+    document.getElementById("large").innerHTML = count;
+    document.getElementById("tagline").innerHTML = getLocalizedText("multiStreakText");
+  } else {
+    document.getElementById("large").innerHTML = getLocalizedText("bigZeroStreakText");
+    document.getElementById("tagline").innerHTML = getLocalizedText("zeroStreakText");
+  }
 }
 
 /**

@@ -95,6 +95,17 @@ h4 {
       margin-top: 1px;
     }
 
+#streak-wrapper {
+
+}
+  #streak-wrapper #large {
+    color: #529FFF;
+  }
+  #streak-wrapper #tagline {
+    color: #4E4E4E;
+    font-weight: 300;
+  }
+
 /**
  * Retina Images
  */
