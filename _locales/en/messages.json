@@ -1,4 +1,7 @@
 {
+  /**
+   * General Messages
+   */
   "appName": {
     "message": "GitGud",
     "description": "The title of the application."
@@ -7,27 +10,41 @@
     "message": "Replaces the new tab page with the current contribution streak from github",
     "description": "The description of the application."
   },
-
-  "streakText": {
-    "message": "Day Streak!",
-    "description": ""
-  },
-
-  "askFormQuestion": {
-    "message": "What is your github username?",
-    "description": ""
-  },
-  "askFormSubmit": {
-    "message": "Submit",
-    "description": ""
-  },
-
-  "error404": {
-    "message": "Cannot find the username specified",
-    "description": ""
-  },
   "errorOther": {
     "message": "Uh oh, something went wrong",
-    "description": ""
+    "description": "The Generic error message."
+  },
+
+  /**
+   * Messages that belong on the initial configuration view
+   */
+  "askFormQuestion": {
+    "message": "Enter your Github username",
+    "description": "The text that the user is asked to enter their username."
+  },
+  "askFormInputPlaceholder": {
+    "message": "Username",
+    "description": "The text that is used for the placeholder attribute on the input box"
+  },
+  "error404": {
+    "message": "Cannot find the username specified",
+    "description": "The message that appears when the user enters an incorrect username."
+  },
+
+  /**
+   * Messages that belong on the current streak view
+   */
+  "bigZeroStreakText": {
+    "message": "Uh Oh!",
+    "description": "Part 1 of the text that appears when the configured username doesn't have a streak."
+  },
+  "zeroStreakText": {
+    "message": "Your streak is Zero.",
+    "description": "Part 2 of the text that appears when the configured username doesn't have a streak."
+  },
+
+  "multiStreakText": {
+    "message": "Day Streak!",
+    "description": "The text that appears when the configured username has a streak of 1 or more days."
   }
 }

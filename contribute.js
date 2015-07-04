@@ -4,6 +4,13 @@
  */
 var LOCAL_STREAK_KEY = "contributionStreak";
 var LOCAL_USERNAME_KEY = "githubUsername";
+var INPUT_VIEW = "input_view";
+var STREAK_VIEW = "streak_view";
+
+/**
+ * Instance variables
+ */
+var currentView;
 
 /**
  * The fun begins here
@@ -11,8 +18,10 @@ var LOCAL_USERNAME_KEY = "githubUsername";
 window.onload = function() {
   // getUsername() returns from localStorage
   if (getUsername() === null) {
+    currentView = INPUT_VIEW;
     renderForm();
   } else {
+    currentView = STREAK_VIEW;
     renderStreak();
   }
 };
@@ -30,7 +39,7 @@ var renderForm = function() {
   var source = document.getElementById("ask-form").innerHTML;
   var context = {
     askFormQuestion: getLocalizedText('askFormQuestion'),
-    askFormSubmit: getLocalizedText('askFormSubmit')
+    askFormInputPlaceholder: getLocalizedText('askFormInputPlaceholder')
   }
 
   render(source, context);
@@ -41,7 +50,7 @@ var renderForm = function() {
 var renderStreak = function() {
   var source = document.getElementById("streak").innerHTML;
   var context = {
-    streakText: getLocalizedText('streakText')
+    streakText: getLocalizedText('multiStreakText')
   }
 
   render(source, context);
@@ -79,11 +88,8 @@ var getContributionData = function() {
       if(xmlhttp.status == 200){
         calculateStreak(xmlhttp.responseText);
       }
-      else if(xmlhttp.status == 400) {
-        alert(getLocalizedText('error404'));
-      }
       else {
-        alert(getLocalizedText('errorOther'));
+        // An error occurred
       }
     }
   }
@@ -160,7 +166,13 @@ var setStreak = function(count) {
 }
 
 var showStreak = function(count) {
-  document.getElementById("days").innerHTML = count;
+  if (count > 0) {
+    document.getElementById("large").innerHTML = count;
+    document.getElementById("tagline").innerHTML = getLocalizedText("multiStreakText");
+  } else {
+    document.getElementById("large").innerHTML = getLocalizedText("bigZeroStreakText");
+    document.getElementById("tagline").innerHTML = getLocalizedText("zeroStreakText");
+  }
 }
 
 /**
