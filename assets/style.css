@@ -1,0 +1,94 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1 {
+  font-size: 10em;
+  margin: 0;
+  padding: 0;
+}
+h4 {
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+}
+
+#display {
+  text-align: center;
+  height: 100%;
+}
+  #display:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+
+#ask-wrapper, #streak-wrapper {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#ask-wrapper .question {
+  color: #4E4E4E;
+  font-weight: 300;
+}
+
+#ask-form {
+  margin: 15px auto;
+  width: 260px;
+}
+  #ask-form button, #ask-form input {
+    outline: none;
+  }
+  #ask-form input {
+    background: #ffffff;
+    border: 1px solid #BABABA;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    font-size: 12px;
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+    position: relative;
+    height: 35px;
+    width: 200px;
+  }
+    #ask-form input.error {
+      color: #E05F5A;
+      border-color: #E0857F;
+    }
+    #ask-form input.error::-webkit-input-placeholder { /* WebKit browsers */
+      color: #E05F5A;
+    }
+    #ask-form input.error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: #E05F5A;
+      opacity: 1;
+    }
+    #ask-form input.error::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: #E05F5A;
+      opacity: 1;
+    }
+    #ask-form input.error:-ms-input-placeholder { /* Internet Explorer 10+ */
+      color: #E05F5A;
+    }
+  #ask-form button {
+    background: #529fff url('/assets/Arrow Icon.png') no-repeat center center;
+    border: 0;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    float: left;
+    position: relative;
+    height: 37px;
+    width: 35px;
+  }
+    #ask-form button:hover {
+      background-color: #488CE0;
+    }
+    #ask-form button:active {
+      margin-top: 1px;
+    }

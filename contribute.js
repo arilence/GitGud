@@ -4,6 +4,13 @@
  */
 var LOCAL_STREAK_KEY = "contributionStreak";
 var LOCAL_USERNAME_KEY = "githubUsername";
+var INPUT_VIEW = "input_view";
+var STREAK_VIEW = "streak_view";
+
+/**
+ * Instance variables
+ */
+var currentView;
 
 /**
  * The fun begins here
@@ -11,8 +18,10 @@ var LOCAL_USERNAME_KEY = "githubUsername";
 window.onload = function() {
   // getUsername() returns from localStorage
   if (getUsername() === null) {
+    currentView = INPUT_VIEW;
     renderForm();
   } else {
+    currentView = STREAK_VIEW;
     renderStreak();
   }
 };
@@ -78,9 +87,6 @@ var getContributionData = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
       if(xmlhttp.status == 200){
         calculateStreak(xmlhttp.responseText);
-      }
-      else if(xmlhttp.status == 400) {
-        alert(getLocalizedText('error404'));
       }
       else {
         alert(getLocalizedText('errorOther'));
