@@ -77,7 +77,9 @@ h4 {
       color: #E05F5A;
     }
   #ask-form button {
-    background: #529fff url('/assets/Arrow Icon.png') no-repeat center center;
+    background: #529fff no-repeat center center;
+    background-image: url('/assets/arrow.png');
+    background-size: 11px 10px;
     border: 0;
     border-radius: 0 8px 8px 0;
     cursor: pointer;
@@ -92,3 +94,18 @@ h4 {
     #ask-form button:active {
       margin-top: 1px;
     }
+
+/**
+ * Retina Images
+ */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+  #ask-form button {
+    background-image: url('/assets/arrow@2x.png');
+  }
+}
