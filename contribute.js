@@ -30,7 +30,7 @@ var renderForm = function() {
   var source = document.getElementById("ask-form").innerHTML;
   var context = {
     askFormQuestion: getLocalizedText('askFormQuestion'),
-    askFormSubmit: getLocalizedText('askFormSubmit')
+    askFormInputPlaceholder: getLocalizedText('askFormInputPlaceholder')
   }
 
   render(source, context);
@@ -41,7 +41,7 @@ var renderForm = function() {
 var renderStreak = function() {
   var source = document.getElementById("streak").innerHTML;
   var context = {
-    streakText: getLocalizedText('streakText')
+    streakText: getLocalizedText('multiStreakText')
   }
 
   render(source, context);
@@ -160,7 +160,7 @@ var setStreak = function(count) {
 }
 
 var showStreak = function(count) {
-  document.getElementById("days").innerHTML = count;
+  document.getElementById("large").innerHTML = count;
 }
 
 /**

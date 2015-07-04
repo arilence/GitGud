@@ -1,3 +1,6 @@
+### Design Assets ###
+*.sketch
+
 ### SublimeText ###
 *.tmlanguage.cache
 *.tmPreferences.cache
